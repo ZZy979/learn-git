@@ -4,3 +4,4 @@ Git has a mutable index called stage.
 Git trackes changes of files.
 Creating a new branch is quick and simple.
 --no-ff creates a merge commit.
+Added by ZZy.
