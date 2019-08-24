@@ -5,3 +5,4 @@ Git trackes changes of files.
 Creating a new branch is quick and simple.
 --no-ff creates a merge commit.
 Added by ZZy & cooperator.
+Try git pull
