@@ -7,4 +7,5 @@ Creating a new branch is quick and simple.
 Added by ZZy & cooperator.
 Try git pull
 Try git fetch
-Try rebase 3
+master: Try rebase 3
+zzy: Try rebase 1
