@@ -13,4 +13,5 @@ zzy: Try rebase 2
 
 What does "git pull" pull actually?
 What does "git push" push actually? (on branch bar)
+What does "git push" push actually? (on branch baz)
 
