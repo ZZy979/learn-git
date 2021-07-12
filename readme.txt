@@ -10,3 +10,5 @@ Try git fetch
 master: Try rebase 3
 zzy: Try rebase 1
 zzy: Try rebase 2
+
+What does "git pull" pull actually? (on branch foo)
