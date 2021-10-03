@@ -16,3 +16,4 @@ What does "git push" push actually? (on branch bar)
 What does "git push" push actually? (on branch baz)
 
 multi-line commit message
+Subject and body of commit message are separated by a blank line.
