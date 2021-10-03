@@ -15,3 +15,4 @@ What does "git pull" pull actually?
 What does "git push" push actually? (on branch bar)
 What does "git push" push actually? (on branch baz)
 
+multi-line commit message
