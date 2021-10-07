@@ -9,7 +9,7 @@ on:
 jobs:
   greeting:
     name: Greeting
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - id: hello
         uses: sormuras/hello-world-java-action@v1
@@ -20,14 +20,14 @@ jobs:
   build:
     name: Build
     needs: greeting
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Pretend to build"
 
   test1:
     name: Test1
     needs: build
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -40,7 +40,7 @@ jobs:
   test2:
     name: Test2
     needs: build
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -55,6 +55,6 @@ jobs:
     needs:
       - test1
       - test2
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Pretend to deploy"
