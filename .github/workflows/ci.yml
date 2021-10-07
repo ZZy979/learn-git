@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  greeting:
+    name: Greeting
+    runs_on: ubuntu-latest
+    steps:
+      - id: hello
+        uses: sormuras/hello-world-java-action@v1
+        with:
+          who-to-greet: 'ZZy'
+      - run: echo random-number ${{ steps.hello.outputs.random-number }}
+
+  build:
+    name: Build
+    needs: greeting
+    runs_on: ubuntu-latest
+    steps:
+      - run: echo "Pretend to build"
+
+  test1:
+    name: Test1
+    needs: build
+    runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Run test1
+        run: python -m unittest calculator
+
+  test2:
+    name: Test2
+    needs: build
+    runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Run test2
+        run: python -m unittest calculator.CalculatorTests.test_div_by_zero
+
+  deploy:
+    name: Deploy
+    needs:
+      - test1
+      - test2
+    runs_on: ubuntu-latest
+    steps:
+      - run: echo "Pretend to deploy"

@@ -1,6 +1,7 @@
 # This is a basic workflow to help you get started with Actions
+# https://github.com/actions/starter-workflows/blob/main/ci/blank.yml
 
-name: CI
+name: Blank
 
 # Controls when the action will run. 
 on:
