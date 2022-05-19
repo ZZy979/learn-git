@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [ master ]
 
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 jobs:
   greeting:
     name: Greeting
@@ -19,13 +20,15 @@ jobs:
 
   build:
     name: Build
-    needs: greeting
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Pretend to build"
+      - run: |
+          echo "Compiling the code..."
+          sleep 10
+          echo "Compile complete."
 
-  test1:
-    name: Test1
+  unit-test:
+    name: Unit test
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -34,27 +37,26 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Run test1
-        run: python -m unittest calculator
+      - run: |
+          echo "Running unit tests..."
+          python -m unittest calculator
+          echo "Code coverage is 90%"
 
-  test2:
-    name: Test2
+  lint-test:
+    name: Lint test
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: Run test2
-        run: python -m unittest calculator.CalculatorTests.test_div_by_zero
+      - run: |
+          echo "Linting code... This will take about 10 seconds."
+          sleep 10
+          echo "No lint issues found."
 
   deploy:
     name: Deploy
-    needs:
-      - test1
-      - test2
+    needs: [unit-test, lint-test]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Pretend to deploy"
+      - run: |
+          echo "Deploying application..."
+          echo "Application successfully deployed."
