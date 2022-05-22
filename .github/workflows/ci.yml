@@ -60,3 +60,41 @@ jobs:
       - run: |
           echo "Deploying application..."
           echo "Application successfully deployed."
+
+  upload-artifact:
+    name: Create and upload artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create artifact
+        run: |
+          echo "github.event_name = ${{ github.event_name }}" > context.txt
+          echo "github.repository = ${{ github.repository }}" > context.txt
+          echo "github.ref = ${{ github.ref }}" > context.txt
+          echo "github.sha = ${{ github.sha }}" > context.txt
+          echo "github.workspace = ${{ github.workspace }}" > context.txt
+      - name: List files
+        run: |
+          pwd
+          ls
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: context
+          path: context.txt
+          retention-days: 1
+
+  download-artifact:
+    name: Download and print artifact
+    needs: upload-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: context
+      - name: List files
+        run: |
+          pwd
+          ls
+      - name: Print artifact
+        run: cat context.txt
