@@ -67,11 +67,11 @@ jobs:
     steps:
       - name: Create artifact
         run: |
-          echo "github.event_name = ${{ github.event_name }}" > context.txt
-          echo "github.repository = ${{ github.repository }}" > context.txt
-          echo "github.ref = ${{ github.ref }}" > context.txt
-          echo "github.sha = ${{ github.sha }}" > context.txt
-          echo "github.workspace = ${{ github.workspace }}" > context.txt
+          echo "github.event_name = ${{ github.event_name }}" >> context.txt
+          echo "github.repository = ${{ github.repository }}" >> context.txt
+          echo "github.ref = ${{ github.ref }}" >> context.txt
+          echo "github.sha = ${{ github.sha }}" >> context.txt
+          echo "github.workspace = ${{ github.workspace }}" >> context.txt
       - name: List files
         run: |
           pwd
