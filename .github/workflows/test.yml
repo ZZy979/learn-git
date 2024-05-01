@@ -11,10 +11,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install SWIG
+        if: runner.os == 'macOS'
+        run: brew install swig
       - name: Find tools
         run: |
           which gcc
@@ -25,8 +28,9 @@ jobs:
         run: |
           gcc --version
           python --version
-          ls $Python_ROOT_DIR
-          ls $Python_ROOT_DIR/include
+          ls -lh $Python_ROOT_DIR
+          ls -lh $Python_ROOT_DIR/include/python3.11/Python*
+          ls -lh $Python_ROOT_DIR/lib/libpython*
           swig -version
           make --version
 
@@ -37,10 +41,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Setup cl.exe
+        uses: ilammy/msvc-dev-cmd@v1
       - name: Find tools
         run: |
           where gcc
