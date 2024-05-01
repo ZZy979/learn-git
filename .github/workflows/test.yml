@@ -1,0 +1,46 @@
+name: Test
+on:
+  workflow_dispatch:
+
+jobs:
+  test-linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Find tools
+        run: |
+          which gcc
+          which python
+          which swig
+      - name: Print tool versions
+        run: |
+          gcc --version
+          python --version
+          swig -version
+
+  test-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Find tools
+        run: |
+          where gcc
+          where python
+          where swig
+      - name: Print tool versions
+        run: |
+          gcc --version
+          python --version
+          swig -version
