@@ -20,13 +20,20 @@ jobs:
           which gcc
           which python
           which swig
+          which make
       - name: Print tool versions
         run: |
           gcc --version
           python --version
+          ls $Python_ROOT_DIR
+          ls $Python_ROOT_DIR/include
           swig -version
+          make --version
 
   test-windows:
+    defaults:
+      run:
+        shell: cmd
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +46,14 @@ jobs:
           where gcc
           where python
           where swig
+          where cl
+          where mingw32-make
       - name: Print tool versions
         run: |
           gcc --version
           python --version
+          dir %Python_ROOT_DIR%
+          dir %Python_ROOT_DIR%\include
           swig -version
+          cl
+          mingw32-make --version
