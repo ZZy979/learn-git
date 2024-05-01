@@ -45,14 +45,17 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Setup cl.exe
-        uses: ilammy/msvc-dev-cmd@v1
+      - name: Setup cl.exe and csc.exe
+        uses: seanmiddleditch/gha-setup-vsdevenv@master
+        with:
+          components: Microsoft.VisualStudio.Component.VC.Tools.x86.x64;Microsoft.VisualStudio.Component.Roslyn.Compiler
       - name: Find tools
         run: |
           where gcc
           where python
           where swig
           where cl
+          where csc
           where mingw32-make
       - name: Print tool versions
         run: |
@@ -62,4 +65,5 @@ jobs:
           dir %Python_ROOT_DIR%\include
           swig -version
           cl
+          csc
           mingw32-make --version
