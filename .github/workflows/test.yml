@@ -101,6 +101,6 @@ jobs:
       - name: Run hello_world (pwsh)
         shell: pwsh
         run: |
-          where hello_world
-          where hello_world2
+          where.exe hello_world
+          where.exe hello_world2
           hello_world2
