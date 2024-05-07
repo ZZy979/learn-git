@@ -84,3 +84,20 @@ jobs:
       - name: Print PATH (pwsh)
         shell: pwsh
         run: $env:Path -split ';'
+      - name: Compile hello_world
+        run: |
+          gcc -o hello_world.exe hello_world.c
+          mkdir %USERPROFILE%\.local\bin
+          mkdir %USERPROFILE%\.local\bin2
+          copy hello_world.exe %USERPROFILE%\.local\bin\hello_world.exe
+          copy hello_world.exe %USERPROFILE%\.local\bin2\hello_world2.exe
+      - name: Run hello_world (bash)
+        shell: bash
+        run: |
+          hello_world
+          hello_world2
+      - name: Run hello_world (pwsh)
+        shell: pwsh
+        run: |
+          hello_world
+          hello_world2
