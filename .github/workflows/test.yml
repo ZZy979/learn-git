@@ -33,6 +33,10 @@ jobs:
           ls -lh $Python_ROOT_DIR/lib/libpython*
           swig -version
           make --version
+      - name: Add system path
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Print PATH
+        run: echo "$PATH"
 
   test-windows:
     defaults:
@@ -67,3 +71,16 @@ jobs:
           cl
           csc
           mingw32-make --version
+      - name: Add system path (bash)
+        shell: bash
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Print PATH (bash)
+        shell: bash
+        run: echo "$PATH"
+      - name: Add system path (pwsh)
+        shell: pwsh
+        run: |
+          "$env:USERPROFILE/.local/bin2" | Out-File -FilePath $env:GITHUB_PATH -Append
+      - name: Print PATH (pwsh)
+        shell: pwsh
+        run: $env:Path -split ';'
