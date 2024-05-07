@@ -94,10 +94,13 @@ jobs:
       - name: Run hello_world (bash)
         shell: bash
         run: |
+          which hello_world
+          which hello_world2
           hello_world
           hello_world2
       - name: Run hello_world (pwsh)
         shell: pwsh
         run: |
-          hello_world
+          where hello_world
+          where hello_world2
           hello_world2
