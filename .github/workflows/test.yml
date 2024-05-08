@@ -37,6 +37,11 @@ jobs:
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Print PATH
         run: echo "$PATH"
+      - name: Print some paths
+        run: |
+          echo "${{ github.workspace }}"
+          echo "${{ runner.temp }}"
+          echo $HOME
 
   test-windows:
     defaults:
@@ -104,3 +109,15 @@ jobs:
           where.exe hello_world
           where.exe hello_world2
           hello_world2
+      - name: Print some paths (bash)
+        shell: bash
+        run: |
+          echo "${{ github.workspace }}"
+          echo "${{ runner.temp }}"
+          echo $HOME
+      - name: Print some paths (pwsh)
+        shell: pwsh
+        run: |
+          echo "${{ github.workspace }}"
+          echo "${{ runner.temp }}"
+          echo $HOME
